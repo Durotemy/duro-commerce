@@ -1,6 +1,5 @@
 const products = [
     {
-        _id: '1',
         name: 'bluetooth',
         image: '/images/airpods.jpg',
         description: 'Bluetooth technology is wonderful,Bluetooth technology is wonderful,Bluetooth technology is wonderful',
@@ -12,7 +11,6 @@ const products = [
         numReviews: 4,
     },
     {
-        _id: '2',
         name: 'wifi',
         image: '/images/alexa.jpg',
         description: 'Wifi technology is wonderful,Bluetooth technology is wonderful,Bluetooth technology is wonderful',
@@ -24,7 +22,6 @@ const products = [
         numReviews: 3,
     },
     {
-        _id: '3',
         name: 'infared',
         image: '/images/camera.jpg',
         description: 'Infared technology is wonderful,Bluetooth technology is wonderful,Bluetooth technology is wonderful',
@@ -36,7 +33,6 @@ const products = [
         numReviews: 9,
     },
     {
-        _id: '4',
         name: 'blueray',
         image: '/images/mouse.jpg',
         description: 'BlueRay technology is wonderful,Bluetooth technology is wonderful,Bluetooth technology is wonderful',
@@ -50,7 +46,6 @@ const products = [
 
 
     {
-        _id: '5',
         name: 'wifi',
         image: '/images/phone.jpg',
         description: 'Wifi technology is wonderful,Bluetooth technology is wonderful,Bluetooth technology is wonderful',
@@ -64,7 +59,6 @@ const products = [
 
 
     {
-        _id: '6',
         name: 'blueray',
         image: '/images/playstation.jpg',
         description: 'BlueRay technology is wonderful,Bluetooth technology is wonderful,Bluetooth technology is wonderful',
@@ -77,7 +71,6 @@ const products = [
     },
 
     {
-        _id: '7',
         name: 'wifi',
         image: '/images/airpods.jpg',
         description: 'Wifi technology is wonderful,Bluetooth technology is wonderful,Bluetooth technology is wonderful',
@@ -89,7 +82,6 @@ const products = [
         numReviews: 3,
     },
     {
-        _id: '8',
         name: 'wifi',
         image: '/images/alexa.jpg',
         description: 'Wifi technology is wonderful,Bluetooth technology is wonderful,Bluetooth technology is wonderful',
