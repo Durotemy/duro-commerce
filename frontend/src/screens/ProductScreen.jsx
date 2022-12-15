@@ -3,6 +3,7 @@ import Rating from "../components/Rating";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProductsDetails } from "../actions/productActions";
+import { useNavigate } from "react-router-dom";
 import {
   Row,
   Col,
@@ -17,6 +18,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 const ProductScreen = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [qty, setQty] = useState(0);
   const dispatch = useDispatch();
@@ -28,10 +30,8 @@ const ProductScreen = () => {
   }, [dispatch, id]);
 
   const addToCartHandler = () => {
-    
-    console.log('addToCartHandler')
-
-  }
+    navigate(`/cart/${id}?qty=${qty}`);
+  };
 
   return (
     <>
