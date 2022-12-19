@@ -27,7 +27,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use('/api/products', productRoutes);
-app.use('/users', usersController);
+app.use('/api/users', usersController);
+
 
 
 const port = process.env.PORT || 6000;

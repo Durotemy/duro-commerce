@@ -27,7 +27,7 @@ app.use(body_parser_1.default.urlencoded({ extended: true })); // for parsing ap
 app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
 app.use((0, cors_1.default)());
 app.use('/api/products', productRoutes_1.default);
-app.use('/users', userRoutes_1.default);
+app.use('/api/users', userRoutes_1.default);
 const port = process.env.PORT || 6000;
 console.log(`my server is running on port: ${port}`);
 module.exports = app;

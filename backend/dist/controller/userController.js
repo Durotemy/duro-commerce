@@ -12,7 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getUserProfile = exports.registerUser = exports.authUser = void 0;
 const UserModel_1 = __importDefault(require("../models/UserModel"));
+const generateToken_1 = require("../utils/generateToken");
+const authUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, password } = req.body;
+    const user = yield UserModel_1.default.find({ email });
+    if (user && (yield user[0].matchPassword(password))) {
+        res.status(200).json({
+            _id: user[0]._id,
+            name: user[0].name,
+            email: user[0].email,
+            isAdmin: user[0].isAdmin,
+            token: (0, generateToken_1.generateToken)(user[0]._id),
+        });
+    }
+    else {
+        res.status(401).json({ msg: "invalid email or password" });
+    }
+});
+exports.authUser = authUser;
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, password } = req.body;
     const user = yield UserModel_1.default.findOne({ email });
@@ -28,4 +47,19 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     res.status(200).json({ msg: "user created successfully", result });
     console.log(result);
 });
-exports.default = registerUser;
+exports.registerUser = registerUser;
+const getUserProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield UserModel_1.default.findById(req.body._id);
+    if (user) {
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+        });
+    }
+    else {
+        res.status(404).json({ msg: 'User not found' });
+    }
+});
+exports.getUserProfile = getUserProfile;
