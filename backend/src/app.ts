@@ -7,6 +7,8 @@ import logger from "morgan";
 import bodyParser from "body-parser";
 import productRoutes from "./routes/productRoutes";
 import usersController from "./routes/userRoutes";
+import orderRoutes from './routes/orderRoutes.js'
+
 import connectDB from "./config/db";
 
 const app = express();
@@ -28,6 +30,8 @@ app.use(cors());
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', usersController);
+app.use('/api/orders', orderRoutes)
+
 
 
 
