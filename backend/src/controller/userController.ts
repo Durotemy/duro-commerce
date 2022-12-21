@@ -8,6 +8,14 @@ declare module "express" {
   }
 }
 
+declare global {
+  namespace Express {
+    interface Request {
+      user: any //or other type you would like to use
+    }
+  }
+}
+
 
 export const authUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -24,9 +32,12 @@ export const authUser = async (req: Request, res: Response) => {
       token: generateToken(user[0]._id),
     })
   }
+ 
+ 
     else {
     res.status(401).json({ msg: "invalid email or password" });
     }
+   
   }
 ;
 
@@ -48,10 +59,11 @@ export const registerUser = async (req: Request, res: Response) => {
 };
 
 export const getUserProfile = async (req:Request, res:Response) => {
-  const user = await User.findById(req.body._id)
+  const user = await User.findById(req.user._id)
+  console.log("myUser",user)
 
   if (user) {
-    res.json({
+    res.status(200).json({
       _id: user._id,
       name: user.name,
       email: user.email,

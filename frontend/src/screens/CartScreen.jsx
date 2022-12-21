@@ -23,7 +23,12 @@ const CartScreen = () => {
   const [searchParms] = useSearchParams();
   const qty = Number(searchParms.get("qty"));
 
-  
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+
+  console.log("userInfo in cart", userInfo);
+
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -42,7 +47,12 @@ const CartScreen = () => {
   };
 
   const checkoutHandler = () => {
-    navigate("/login?redirect=shipping");
+    if (!userInfo.name === "") {
+      navigate("/login");
+    } else {
+      navigate("/shipping");
+    }
+    // navigate("/login?redirect=shipping");
   };
   return (
     <Row>
