@@ -8,4 +8,5 @@ const orderController_1 = require("../controller/orderController");
 const authmiddleware_1 = require("../middleware/authmiddleware");
 const router = express_1.default.Router();
 router.post('/', authmiddleware_1.protect, orderController_1.addOrderItems);
+router.get('/:id', authmiddleware_1.protect, orderController_1.getOrderById);
 exports.default = router;
