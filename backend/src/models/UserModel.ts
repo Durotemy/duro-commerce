@@ -5,7 +5,7 @@ interface user{
     name:string,
     email:string,
     password:string,
-    isAdmin:boolean
+    isAdmin:boolean,
     matchPassword: (pw: string) => Promise<boolean>
 }
 

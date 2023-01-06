@@ -50,7 +50,6 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.registerUser = registerUser;
 const getUserProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield UserModel_1.default.findById(req.user._id);
-    console.log("myUser", user);
     if (user) {
         res.status(200).json({
             _id: user._id,

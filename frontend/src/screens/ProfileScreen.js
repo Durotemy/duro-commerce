@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails } from '../actions/userActions'
-// import { listMyOrders } from '../actions/orderActions'
+import { listMyOrders } from '../actions/orderAction'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 
 const ProfileScreen = ({ location, history }) => {
@@ -28,40 +28,36 @@ const ProfileScreen = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
-  const { success } = userUpdateProfile
+  
+  const orderListMy = useSelector((state) => state.orderListMy)
+  const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
 
-  // const orderListMy = useSelector((state) => state.orderListMy)
-  // const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
+  console.log("ordersinprofik",orders)
 
   useEffect(() => {
     if (!userInfo) {
       navigate('/login')
     } else {
-      if (!user || !user.name || success) {
-        dispatch({ type: USER_UPDATE_PROFILE_RESET })
+      if (!user || !user.name) {
+        // dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails('profile'))
-        // dispatch(listMyOrders())
+        dispatch(listMyOrders())
       } else {
         setName(user.name)
         setEmail(user.email)
       }
     }
-  }, [dispatch, navigate, userInfo, user, success])
+  }, [dispatch, navigate, userInfo, user])
 
   const submitHandler = (e) => {
     e.preventDefault()
   }
-
-  console.log("profileScreen")
-
   return (
     <Row>
       <Col md={3}>
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
         {}
-        {success && <Message variant='success'>Profile Updated</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
@@ -73,8 +69,8 @@ const ProfileScreen = ({ location, history }) => {
               <Form.Control
                 type='name'
                 placeholder='Enter name'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={userInfo.name}
+                onChange={(e) => setName(userInfo.name)}
               ></Form.Control>
             </Form.Group>
 
@@ -83,40 +79,16 @@ const ProfileScreen = ({ location, history }) => {
               <Form.Control
                 type='email'
                 placeholder='Enter email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={userInfo.email}
+                onChange={(e) => setEmail(userInfo.email)}
               ></Form.Control>
             </Form.Group>
-
-            <Form.Group controlId='password'>
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type='password'
-                placeholder='Enter password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId='confirmPassword'>
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type='password'
-                placeholder='Confirm password'
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-
-            <Button type='submit' variant='primary'>
-              Update
-            </Button>
           </Form>
         )}
       </Col>
       <Col md={9}>
         <h2>My Orders</h2>
-        {/* {loadingOrders ? (
+        {loadingOrders ? (
           <Loader />
         ) : errorOrders ? (
           <Message variant='danger'>{errorOrders}</Message>
@@ -163,11 +135,11 @@ const ProfileScreen = ({ location, history }) => {
               ))}
             </tbody>
           </Table>
-        )} */}
+        )}
       </Col>
     </Row>
   )
 }
 
-export default ProfileScreen
+export default ProfileScreen;
 

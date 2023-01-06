@@ -30,6 +30,7 @@ app.use((0, cors_1.default)());
 app.use('/api/products', productRoutes_1.default);
 app.use('/api/users', userRoutes_1.default);
 app.use('/api/orders', orderRoutes_js_1.default);
+app.get(`/api/config/paypal`, (req, res) => res.send(process.env.PAYPAL_CLIENT_ID));
 const port = process.env.PORT || 6000;
 console.log(`my server is running on port: ${port}`);
 module.exports = app;

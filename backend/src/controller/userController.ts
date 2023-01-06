@@ -60,7 +60,6 @@ export const registerUser = async (req: Request, res: Response) => {
 
 export const getUserProfile = async (req:Request, res:Response) => {
   const user = await User.findById(req.user._id)
-  console.log("myUser",user)
 
   if (user) {
     res.status(200).json({

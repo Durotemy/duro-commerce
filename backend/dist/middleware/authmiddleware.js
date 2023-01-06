@@ -24,11 +24,9 @@ const protect = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
             req.headers.authorization.split(" ")[0] === "Bearer") {
             try {
                 token = req.headers.authorization.split(" ")[1];
-                console.log("token", token);
                 const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
                 const { id } = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
                 req.user = yield UserModel_1.default.findOne({ id, "tokens.token": token });
-                console.log("every", req.user);
                 next();
             }
             catch (error) {

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOrderById = exports.addOrderItems = void 0;
+exports.getMyOrders = exports.updateOrderToPaid = exports.getOrderById = exports.addOrderItems = void 0;
 const OrderModel_1 = __importDefault(require("../models/OrderModel"));
 const addOrderItems = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, shippingPrice, totalPrice, } = req.body;
@@ -43,7 +43,8 @@ const addOrderItems = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.addOrderItems = addOrderItems;
 const getOrderById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const order = yield OrderModel_1.default.findById(req.params.id).populate('user', 'name email');
+        const order = yield OrderModel_1.default.findById(req.params.id);
+        console.log("ccc", order);
         if (order) {
             res.json(order);
         }
@@ -56,3 +57,39 @@ const getOrderById = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.getOrderById = getOrderById;
+const updateOrderToPaid = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const order = yield OrderModel_1.default.findById(req.params.id);
+        if (order) {
+            order.isPaid = true;
+            order.paidAt = Date.now();
+            order.paymentResult = {
+                id: req.body.id,
+                status: req.body.status,
+                update_time: req.body.update_time,
+                email_address: req.body.payer.email_address,
+            };
+            const updatedOrder = yield order.save();
+            res.json(updatedOrder);
+        }
+        else {
+            res.status(404);
+            throw new Error("Order not found");
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.updateOrderToPaid = updateOrderToPaid;
+const getMyOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const orders = yield OrderModel_1.default.find({ user: req.user._id });
+        console.log("orderslllll", orders);
+        res.json(orders);
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.getMyOrders = getMyOrders;

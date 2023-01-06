@@ -22,11 +22,9 @@ export const protect = async (
     ) {
       try {
         token = req.headers.authorization.split(" ")[1];
-        console.log("token", token);
         const decoded = jwt.verify(token, process.env.JWT_SECRET!);
         const { id } = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
         req.user = await User.findOne({ id, "tokens.token": token });
-        console.log("every",req.user);
         next();
       } catch (error) {
         res.status(404);

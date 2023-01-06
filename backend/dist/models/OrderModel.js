@@ -8,7 +8,7 @@ const orderSchema = new mongoose_1.default.Schema({
     user: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         required: true,
-        ref: 'User',
+        ref: 'user',
     },
     orderItems: [
         {

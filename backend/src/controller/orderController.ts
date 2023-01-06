@@ -51,10 +51,8 @@ export const addOrderItems = async (req: Request, res: Response) => {
 };
 export const getOrderById = async (req: Request, res: Response) => {
   try {
-    const order = await Order.findById(req.params.id).populate(
-      "user",
-      "name email"
-    );
+    const order = await Order.findById(req.params.id);
+    console.log("ccc", order);
 
     if (order) {
       res.json(order);
@@ -79,12 +77,22 @@ export const updateOrderToPaid = async (req: Request, res: Response) => {
       };
       const updatedOrder = await order.save();
       res.json(updatedOrder);
-    }
-    else{
-      res.status(404)
-      throw new Error('Order not found')
+    } else {
+      res.status(404);
+      throw new Error("Order not found");
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
+  }
+};
+
+export const getMyOrders = async (req: Request, res: Response) => {
+  try {
+    const orders = await Order.find({ user: req.user._id });
+
+    console.log("orderslllll", orders);
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
   }
 };
