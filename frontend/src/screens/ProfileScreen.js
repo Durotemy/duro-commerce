@@ -14,8 +14,7 @@ const ProfileScreen = ({ location, history }) => {
    location = useLocation()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  
   const [message, setMessage] = useState(null)
 
   const dispatch = useDispatch()
@@ -70,7 +69,6 @@ const ProfileScreen = ({ location, history }) => {
                 type='name'
                 placeholder='Enter name'
                 value={userInfo.name}
-                onChange={(e) => setName(userInfo.name)}
               ></Form.Control>
             </Form.Group>
 
@@ -80,7 +78,6 @@ const ProfileScreen = ({ location, history }) => {
                 type='email'
                 placeholder='Enter email'
                 value={userInfo.email}
-                onChange={(e) => setEmail(userInfo.email)}
               ></Form.Control>
             </Form.Group>
           </Form>

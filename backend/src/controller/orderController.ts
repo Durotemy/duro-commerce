@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Order from "../models/OrderModel";
 import express, { Request, Response } from "express";
 declare module "express" {
@@ -10,7 +11,7 @@ declare module "express" {
 declare global {
   namespace Express {
     interface Request {
-      user: any; //or other type you would like to use
+      user: any;
     }
   }
 }
@@ -88,9 +89,9 @@ export const updateOrderToPaid = async (req: Request, res: Response) => {
 
 export const getMyOrders = async (req: Request, res: Response) => {
   try {
-    const orders = await Order.find({ user: req.user._id });
-
-    console.log("orderslllll", orders);
+    const orders = await Order.findById({ user: req.user._id });
+    // const user = await User.findById(req.user._id)
+    console.log("orders", orders);
     res.json(orders);
   } catch (error) {
     console.log(error);

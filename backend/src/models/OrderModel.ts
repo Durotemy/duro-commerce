@@ -15,6 +15,7 @@ interface order{
     isPaid:{},
     totalPrice:{},
     user:{},
+   
 }
 
 const orderSchema = new mongoose.Schema<order>(
@@ -22,7 +23,8 @@ const orderSchema = new mongoose.Schema<order>(
       user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'user',
+        ref: 'User',
+
       },
       orderItems: [
         {

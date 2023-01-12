@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.protect = void 0;
+exports.admin = exports.protect = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const UserModel_1 = __importDefault(require("../models/UserModel"));
 //   const { _id } = jwt.verify(token, 'thisisfromabhishek') as JwtPayload
@@ -44,3 +44,13 @@ const protect = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.protect = protect;
+const admin = (req, res, next) => {
+    if (req.user && req.user.isAdmin) {
+        next();
+    }
+    else {
+        res.status(401);
+        throw new Error("not authorized as an admin");
+    }
+};
+exports.admin = admin;

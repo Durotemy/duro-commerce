@@ -84,8 +84,9 @@ const updateOrderToPaid = (req, res) => __awaiter(void 0, void 0, void 0, functi
 exports.updateOrderToPaid = updateOrderToPaid;
 const getMyOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const orders = yield OrderModel_1.default.find({ user: req.user._id });
-        console.log("orderslllll", orders);
+        const orders = yield OrderModel_1.default.findById({ user: req.user._id });
+        // const user = await User.findById(req.user._id)
+        console.log("orders", orders);
         res.json(orders);
     }
     catch (error) {
