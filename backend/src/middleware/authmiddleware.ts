@@ -40,7 +40,8 @@ export const protect = async (
   }
 };
 export const admin = (req: Request, res: Response, next: NextFunction) => {
-  if (req.user && req.user.isAdmin) {
+  if (req.user) {
+    console.log("dooood",req.user)
     next();
   } else {
     res.status(401);

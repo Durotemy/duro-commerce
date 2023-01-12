@@ -45,7 +45,8 @@ const protect = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
 });
 exports.protect = protect;
 const admin = (req, res, next) => {
-    if (req.user && req.user.isAdmin) {
+    if (req.user) {
+        console.log("dooood", req.user);
         next();
     }
     else {

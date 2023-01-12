@@ -7,10 +7,6 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const userController_1 = require("../controller/userController");
 const authmiddleware_1 = require("../middleware/authmiddleware");
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
 router.post('/login', userController_1.authUser);
 router.route('/').post(userController_1.registerUser);
 router.route('/').get(authmiddleware_1.protect, authmiddleware_1.admin, userController_1.getUsers);
@@ -19,4 +15,3 @@ router.delete('/:id', authmiddleware_1.protect, authmiddleware_1.admin, userCont
 router.get('/:id', authmiddleware_1.protect, authmiddleware_1.admin, userController_1.getUserById);
 router.put('/:id', authmiddleware_1.protect, authmiddleware_1.admin, userController_1.updateUser);
 exports.default = router;
-// module.exports = router;

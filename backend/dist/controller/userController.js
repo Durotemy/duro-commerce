@@ -65,6 +65,7 @@ const getUserProfile = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.getUserProfile = getUserProfile;
 const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield UserModel_1.default.find({});
+    console.log("llll", users);
     res.json(users);
 });
 exports.getUsers = getUsers;

@@ -67,6 +67,7 @@ export const getUserProfile = async (req: Request, res: Response) => {
 };
 export const getUsers = async (req: Request, res: Response) => {
   const users = await User.find({});
+  console.log("llll",users)
   res.json(users);
 };
 
