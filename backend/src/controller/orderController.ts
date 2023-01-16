@@ -53,7 +53,6 @@ export const addOrderItems = async (req: Request, res: Response) => {
 export const getOrderById = async (req: Request, res: Response) => {
   try {
     const order = await Order.findById(req.params.id);
-    console.log("ccc", order);
 
     if (order) {
       res.json(order);

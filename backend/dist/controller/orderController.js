@@ -44,7 +44,6 @@ exports.addOrderItems = addOrderItems;
 const getOrderById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const order = yield OrderModel_1.default.findById(req.params.id);
-        console.log("ccc", order);
         if (order) {
             res.json(order);
         }

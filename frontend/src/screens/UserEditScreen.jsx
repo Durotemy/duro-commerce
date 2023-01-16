@@ -29,52 +29,32 @@ const UserEditScreen = () => {
   const userLogin = useSelector((state) => state.userLogin)  
   const { userInfo } = userLogin
 
-//   const userUpdate = useSelector((state) => state.userUpdate)
-//   const {
-//     loading: loadingUpdate,
-//     error: errorUpdate,
-//     success: successUpdate,
-//   } = userUpdate
+  const userUpdate = useSelector((state) => state.userUpdate)
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = userUpdate
 
-//   useEffect(() => {
-//     if (successUpdate) {
-//       dispatch({ type: USER_UPDATE_RESET })
-//       navigate('/admin/userlist')
-//     } else {
-//       if (!user.name || user._id !== userId) {
-//         dispatch(getUserDetails(userId))
-//       } else {
-//         setName(user.name)
-//         setEmail(user.email)
-//         setIsAdmin(user.isAdmin)
-//       }
-//     }
-//   }, [dispatch, userId, user, successUpdate, navigate])
-
-
-useEffect(() => {
-    if (!user.name) {
-      dispatch(getUserDetails(userId))
-    }
-    else {
+  useEffect(() => {
+    if (successUpdate) {
+      dispatch({ type: USER_UPDATE_RESET })
+      navigate('/admin/userlist')
+    } else {
+      if (!user.name || user._id !== userId) {
+        dispatch(getUserDetails(userId))
+      } else {
         setName(user.name)
         setEmail(user.email)
         setIsAdmin(user.isAdmin)
+      }
     }
-  }, [dispatch, user, userId])
-
-
-
-
-
-
-
-
+  }, [dispatch, userId, user, successUpdate, navigate])
 
 
   const submitHandler = (e) => {
     e.preventDefault()
-    // dispatch(updateUser({ _id: userId, name, email, isAdmin }))
+    dispatch(updateUser({ _id: userId, name, email, isAdmin }))
   }
 
   return (
@@ -84,8 +64,8 @@ useEffect(() => {
       </Link>
       <FormContainer>
         <h1>Edit User</h1>
-        {/* {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>} */}
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
