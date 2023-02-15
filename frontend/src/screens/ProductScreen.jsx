@@ -25,6 +25,7 @@ const ProductScreen = () => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
+
   useEffect(() => {
     dispatch(listProductsDetails(params.id));
   }, [dispatch, params.id]);

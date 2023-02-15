@@ -49,6 +49,8 @@ export const createProduct =async (req:Request, res:Response) => {
     description: 'Sample description',
   })
 
+  console.log("gggg",product)
+
   const createdProduct = await product.save()
   res.status(201).json(createdProduct)
 }

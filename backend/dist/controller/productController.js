@@ -62,6 +62,7 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         numReviews: 0,
         description: 'Sample description',
     });
+    console.log("gggg", product);
     const createdProduct = yield product.save();
     res.status(201).json(createdProduct);
 });

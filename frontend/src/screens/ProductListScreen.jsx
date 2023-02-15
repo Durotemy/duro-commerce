@@ -10,7 +10,7 @@ import Loader from '../components/Loader'
 import {
   listProducts,
   deleteProduct,
-  // createProduct,
+  createProduct,
 } from '../actions/productActions'
 // import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 
@@ -72,7 +72,7 @@ const ProductListScreen = () => {
   }
 
   const createProductHandler = () => {
-    // dispatch(createProduct())
+    dispatch(createProduct())
   }
 
   return (
