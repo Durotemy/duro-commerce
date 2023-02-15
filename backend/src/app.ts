@@ -26,7 +26,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-// app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use("/api/products", productRoutes);
@@ -38,8 +37,8 @@ app.get(`/api/config/paypal`, (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 );
 
-const __dirname = path.resolve();
-app.use("/upload", express.static(path.join(__dirname, "/uploads")));
+const dirname = path.resolve();
+app.use("/upload", express.static(path.join(dirname, "/uploads")));
 
 const port = process.env.PORT || 6000;
 console.log(`my server is running on port: ${port}`);
