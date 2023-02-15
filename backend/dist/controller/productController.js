@@ -134,7 +134,7 @@ const createProductReview = (req, res) => __awaiter(void 0, void 0, void 0, func
 });
 exports.createProductReview = createProductReview;
 const getTopProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const products = yield ProductModel_1.default.find({}).limit(3);
+    const products = yield ProductModel_1.default.find({}).sort({ rating: -1 }).limit(3);
     return res.json(products);
 });
 exports.getTopProducts = getTopProducts;

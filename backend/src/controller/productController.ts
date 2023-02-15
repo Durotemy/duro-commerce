@@ -135,7 +135,7 @@ export const createProductReview = async (req: Request, res: Response) => {
   }
 };
 export const getTopProducts = async (req: Request, res: Response)=>{
-  const products = await Product.find({}).limit(3)
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3)
   return res.json(products)
 }
 // export default { getProduct, getProductById };
